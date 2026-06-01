@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Kickstarter — Bulunun. Görünün. Erişin.</title>
+    <title>Digital Kickstarter — Bulunun. Görünün. Dolun.</title>
     <meta name="description" content="Kaş, Kalkan, Fethiye ve Bodrum'daki turizm işletmelerine dijital görünürlük: çift dilli web siteleri, Google optimizasyonu ve rezervasyon sistemleri.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -486,6 +486,7 @@
 
         /* ============ RESPONSIVE ============ */
         @media (max-width: 1024px) {
+            .services, .portfolio, .packages, .results, .about, .contact { padding: 80px 0; }
             .services-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
             .service-card.featured { order: -1; }
             .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
@@ -499,6 +500,8 @@
             .gallery-strip-inner img:nth-child(4), .gallery-strip-inner img:nth-child(5) { display: none; }
         }
         @media (max-width: 768px) {
+            .services, .portfolio, .packages, .results, .about, .contact { padding: 60px 0; }
+            .services-header, .portfolio-header, .packages-header, .results-header { margin-bottom: 32px; }
             .nav-links {
                 display: none; position: fixed; inset: 0; background: var(--navy);
                 flex-direction: column; align-items: center; justify-content: center; gap: 28px; z-index: 999;
@@ -513,8 +516,9 @@
             .nav-toggle.open span:nth-child(2) { opacity: 0; }
             .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--white); }
             .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
-            .hero-sub { font-size: 1rem; }
-            .hero-buttons { flex-direction: column; align-items: center; }
+            .hero-sub { font-size: 1rem; margin-bottom: 32px; }
+            .hero-buttons { flex-direction: column; align-items: stretch; width: 100%; max-width: 300px; margin: 0 auto; gap: 12px; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
             .portfolio-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
             .results-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
             .result-card { padding: 32px 16px; }
@@ -533,6 +537,9 @@
             .results-grid { grid-template-columns: 1fr; }
             .gallery-strip-inner { grid-template-columns: 1fr; }
             .gallery-strip-inner img:nth-child(2) { display: none; }
+            .service-card { padding: 32px 24px; }
+            .package-card { padding: 32px 24px; }
+            .contact-form-wrapper { padding: 24px 16px; }
         }
     </style>
 </head>
@@ -574,7 +581,7 @@
                 <span data-lang="en">Now serving the Turkish Riviera</span>
             </div>
             <h1>
-                <span data-lang="tr">Bulunun. Görünün.<br><span class="gold">Erişin.</span></span>
+                <span data-lang="tr">Bulunun. Görünün.<br><span class="gold">Dolun.</span></span>
                 <span data-lang="en">Get found. Get seen.<br><span class="gold">Get booked.</span></span>
             </h1>
             <p class="hero-sub">
