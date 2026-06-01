@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Kickstarter — Bulunun. Görünün. Dolun.</title>
+    <meta name="description" content="Kaş, Kalkan, Fethiye ve Bodrum'daki turizm işletmelerine dijital görünürlük: çift dilli web siteleri, Google optimizasyonu ve rezervasyon sistemleri.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --gold: #C6A44E;
+            --gold-light: #D4B96A;
+            --gold-pale: #F5ECD7;
+            --navy: #1A1F36;
+            --navy-light: #2D3352;
+            --warm-white: #FDFAF5;
+            --cream: #F9F5EE;
+            --sand: #F0EAE0;
+            --text-primary: #1A1F36;
+            --text-secondary: #5A5A6E;
+            --text-light: #8A8A9E;
+            --white: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(26,31,54,0.06);
+            --shadow-md: 0 4px 20px rgba(26,31,54,0.08);
+            --shadow-lg: 0 10px 40px rgba(26,31,54,0.12);
+            --shadow-gold: 0 4px 20px rgba(198,164,78,0.25);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background: var(--warm-white);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Language visibility — TR shown by default, EN hidden */
+        [data-lang="en"] { display: none; }
+        html.en [data-lang="en"] { display: inline; }
+        html.en [data-lang="tr"] { display: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============ TYPOGRAPHY ============ */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .section-label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 620px;
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-primary { background: var(--gold); color: var(--white); }
+        .btn-primary:hover { background: var(--gold-light); box-shadow: var(--shadow-gold); transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.5); }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+        .btn-outline-dark { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+        .btn-outline-dark:hover { background: var(--navy); color: var(--white); }
+        .btn-gold-outline { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+        .btn-gold-outline:hover { background: var(--gold); color: var(--white); }
+        .btn-arrow::after { content: "\2192"; transition: transform var(--transition); }
+        .btn-arrow:hover::after { transform: translateX(4px); }
+
+        /* ============ NAVIGATION ============ */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 1000; padding: 20px 0; transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 12px 0; box-shadow: 0 2px 30px rgba(26,31,54,0.08);
+        }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            max-width: 1200px; margin: 0 auto; padding: 0 24px;
+        }
+        .nav-logo {
+            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.2rem;
+            color: var(--white); transition: color var(--transition);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-logo .logo-mark {
+            width: 36px; height: 36px; background: var(--gold); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.1rem; color: var(--white);
+        }
+        nav.scrolled .nav-logo { color: var(--navy); }
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a.nav-item {
+            font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.85);
+            transition: color var(--transition); position: relative;
+        }
+        .nav-links a.nav-item::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--gold); transition: width var(--transition);
+        }
+        .nav-links a.nav-item:hover::after { width: 100%; }
+        .nav-links a.nav-item:hover { color: var(--white); }
+        nav.scrolled .nav-links a.nav-item { color: var(--text-secondary); }
+        nav.scrolled .nav-links a.nav-item:hover { color: var(--navy); }
+
+        .nav-cta {
+            padding: 10px 24px; background: var(--gold); color: var(--white) !important;
+            border-radius: 50px; font-weight: 600; font-size: 0.85rem;
+        }
+        .nav-cta:hover {
+            background: var(--gold-light); box-shadow: var(--shadow-gold);
+            transform: translateY(-1px); color: var(--white) !important;
+        }
+
+        /* Language switcher */
+        .lang-switch {
+            display: flex; align-items: center; gap: 2px;
+            border: 1px solid rgba(255,255,255,0.35); border-radius: 50px;
+            padding: 3px; transition: var(--transition);
+        }
+        nav.scrolled .lang-switch { border-color: rgba(26,31,54,0.2); }
+        .lang-switch button {
+            border: none; background: transparent; cursor: pointer;
+            font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.78rem;
+            padding: 5px 12px; border-radius: 50px; color: rgba(255,255,255,0.7);
+            transition: var(--transition);
+        }
+        nav.scrolled .lang-switch button { color: var(--text-secondary); }
+        .lang-switch button.active { background: var(--gold); color: var(--white); }
+
+        .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; }
+        .nav-toggle span { width: 24px; height: 2px; background: var(--white); transition: var(--transition); }
+        nav.scrolled .nav-toggle span { background: var(--navy); }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative; min-height: 100vh; display: flex;
+            align-items: center; justify-content: center; overflow: hidden;
+        }
+        .hero-bg { position: absolute; inset: 0; z-index: 0; }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+        .hero-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(26,31,54,0.60) 0%, rgba(26,31,54,0.45) 40%, rgba(26,31,54,0.78) 100%);
+        }
+        .hero-content { position: relative; z-index: 2; text-align: center; max-width: 820px; padding: 100px 24px 0; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.12); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.18); padding: 8px 20px;
+            border-radius: 50px; font-size: 0.8rem; font-weight: 500;
+            color: rgba(255,255,255,0.9); margin-bottom: 28px; letter-spacing: 0.04em;
+        }
+        .hero-badge .dot { width: 6px; height: 6px; background: #4ADE80; border-radius: 50%; animation: pulse-dot 2s infinite; }
+        @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        .hero h1 {
+            font-size: clamp(2.6rem, 5.5vw, 4.4rem); color: var(--white);
+            margin-bottom: 24px; font-weight: 700; letter-spacing: -0.02em;
+        }
+        .hero h1 .gold { color: var(--gold); }
+        .hero-sub {
+            font-size: clamp(1.05rem, 2vw, 1.3rem); color: rgba(255,255,255,0.82);
+            margin: 0 auto 44px; line-height: 1.7; max-width: 600px;
+        }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .hero-scroll {
+            position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+            z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: rgba(255,255,255,0.5); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+        }
+        .hero-scroll .scroll-line {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+            animation: scroll-pulse 2s ease-in-out infinite;
+        }
+        @keyframes scroll-pulse { 0%,100% { opacity: 0.3; transform: scaleY(0.7); } 50% { opacity: 1; transform: scaleY(1); } }
+
+        /* ============ SERVICES ============ */
+        .services { padding: 120px 0; background: var(--warm-white); }
+        .services-header { text-align: center; margin-bottom: 64px; }
+        .services-header .section-subtitle { margin: 0 auto; }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; align-items: stretch;
+        }
+        .service-card {
+            background: var(--white); border-radius: var(--radius-lg); padding: 44px 34px;
+            transition: var(--transition); border: 1px solid rgba(26,31,54,0.06);
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .service-card.featured { background: var(--navy); border-color: transparent; }
+        .service-card.featured:hover { box-shadow: 0 20px 60px rgba(26,31,54,0.25); }
+        .service-card.featured .service-icon { background: rgba(198,164,78,0.15); }
+        .service-card.featured .service-desc,
+        .service-card.featured .service-features li { color: rgba(255,255,255,0.85); }
+        .service-card.featured .service-name { color: var(--white); }
+        .service-card.featured .service-tag { color: var(--gold); }
+        .badge-popular {
+            position: absolute; top: 18px; right: 18px;
+            background: var(--gold); color: var(--white);
+            font-family: 'DM Sans', sans-serif; font-size: 0.65rem; font-weight: 700;
+            padding: 5px 12px; border-radius: 50px;
+            letter-spacing: 0.06em; text-transform: uppercase;
+        }
+        .service-icon {
+            width: 60px; height: 60px; background: var(--gold-pale); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+        }
+        .service-tag {
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--gold); margin-bottom: 8px;
+        }
+        .service-name {
+            font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 600;
+            color: var(--navy); margin-bottom: 12px;
+        }
+        .service-desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 24px; line-height: 1.7; }
+        .service-divider { width: 100%; height: 1px; background: rgba(26,31,54,0.08); margin: 0 0 24px; }
+        .service-card.featured .service-divider { background: rgba(255,255,255,0.12); }
+        .service-features { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+        .service-features li {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;
+        }
+        .service-features li .check { color: var(--gold); font-weight: 700; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+        .service-bottom { margin-top: 28px; }
+        .service-bottom .btn { width: 100%; justify-content: center; }
+
+        /* ============ PORTFOLIO ============ */
+        .portfolio { padding: 120px 0; background: var(--cream); }
+        .portfolio-header { text-align: center; margin-bottom: 64px; }
+        .portfolio-header .section-subtitle { margin: 0 auto; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .portfolio-card {
+            position: relative; border-radius: var(--radius-lg); overflow: hidden;
+            aspect-ratio: 4/3; cursor: pointer;
+        }
+        .portfolio-card img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: center; transition: transform 0.6s ease;
+        }
+        .portfolio-card:hover img { transform: scale(1.08); }
+        .portfolio-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(0deg, rgba(26,31,54,0.9) 0%, rgba(26,31,54,0.3) 50%, rgba(26,31,54,0.05) 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 28px; transition: var(--transition);
+        }
+        .portfolio-card:hover .portfolio-overlay {
+            background: linear-gradient(0deg, rgba(26,31,54,0.95) 0%, rgba(26,31,54,0.5) 50%, rgba(26,31,54,0.15) 100%);
+        }
+        .portfolio-name {
+            font-family: 'Playfair Display', serif; font-size: 1.35rem;
+            color: var(--white); font-weight: 600; margin-bottom: 4px;
+        }
+        .portfolio-location { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+        .portfolio-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .portfolio-tags span {
+            background: rgba(198,164,78,0.2); border: 1px solid rgba(198,164,78,0.3);
+            color: var(--gold-light); font-size: 0.7rem; font-weight: 600;
+            padding: 4px 12px; border-radius: 50px; letter-spacing: 0.03em; text-transform: uppercase;
+        }
+        .portfolio-cta {
+            border: 2px dashed rgba(198,164,78,0.4); background: rgba(198,164,78,0.04);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; aspect-ratio: 4/3; border-radius: var(--radius-lg);
+            padding: 32px; transition: var(--transition);
+        }
+        .portfolio-cta:hover { border-color: var(--gold); background: rgba(198,164,78,0.08); }
+        .portfolio-cta .cta-icon {
+            width: 60px; height: 60px; border-radius: 50%; background: var(--gold-pale);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: var(--gold); margin-bottom: 18px;
+        }
+        .portfolio-cta h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 8px; }
+        .portfolio-cta p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
+
+        /* ============ PACKAGES ============ */
+        .packages { padding: 120px 0; background: var(--warm-white); }
+        .packages-header { text-align: center; margin-bottom: 64px; }
+        .packages-header .section-subtitle { margin: 0 auto; }
+        .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+        .package-card {
+            background: var(--white); border: 1px solid rgba(26,31,54,0.08);
+            border-radius: var(--radius-lg); padding: 40px 32px;
+            display: flex; flex-direction: column; transition: var(--transition); position: relative;
+        }
+        .package-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .package-card.featured { border-color: var(--gold); box-shadow: var(--shadow-gold); }
+        .package-name {
+            font-family: 'Playfair Display', serif; font-size: 1.5rem;
+            color: var(--navy); margin-bottom: 6px;
+        }
+        .package-tagline { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 22px; }
+        .package-divider { height: 1px; background: rgba(26,31,54,0.08); margin-bottom: 22px; }
+        .package-features { display: flex; flex-direction: column; gap: 11px; flex: 1; margin-bottom: 28px; }
+        .package-features li {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5;
+        }
+        .package-features li .check { color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+        .package-card .btn { width: 100%; justify-content: center; }
+        .packages-note { text-align: center; margin-top: 40px; color: var(--text-light); font-size: 0.85rem; }
+
+        /* ============ RESULTS ============ */
+        .results { padding: 120px 0; background: var(--navy); position: relative; overflow: hidden; }
+        .results::before {
+            content: ''; position: absolute; top: -50%; right: -20%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(198,164,78,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .results-header { text-align: center; margin-bottom: 64px; position: relative; z-index: 1; }
+        .results-header .section-title { color: var(--white); }
+        .results-header .section-subtitle { color: rgba(255,255,255,0.6); margin: 0 auto; }
+        .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; z-index: 1; }
+        .result-card {
+            text-align: center; padding: 44px 22px; border-radius: var(--radius-lg);
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); transition: var(--transition);
+        }
+        .result-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(198,164,78,0.3); transform: translateY(-4px); }
+        .result-icon { display: flex; justify-content: center; margin-bottom: 18px; }
+        .result-number {
+            font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3rem);
+            color: var(--gold); font-weight: 700; margin-bottom: 8px; line-height: 1;
+        }
+        .result-label { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.5; }
+        .results-note { text-align: center; margin-top: 44px; color: rgba(255,255,255,0.35); font-size: 0.8rem; position: relative; z-index: 1; }
+
+        /* ============ ABOUT ============ */
+        .about { padding: 120px 0; background: var(--cream); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-image { position: relative; border-radius: var(--radius-lg); }
+        .about-image img { width: 100%; height: 500px; object-fit: cover; border-radius: var(--radius-lg); position: relative; z-index: 1; }
+        .about-image::after {
+            content: ''; position: absolute; bottom: -14px; right: -14px;
+            width: 55%; height: 55%; border: 3px solid var(--gold);
+            border-radius: var(--radius-lg); z-index: 0; opacity: 0.4;
+        }
+        .about-label {
+            font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+        }
+        .about-title { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--navy); margin-bottom: 24px; }
+        .about-text { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; margin-bottom: 16px; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+        .about-feature {
+            display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+            background: var(--white); border-radius: var(--radius); transition: var(--transition);
+        }
+        .about-feature:hover { background: var(--gold-pale); }
+        .about-feature .feat-icon {
+            width: 40px; height: 40px; background: var(--gold); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .about-feature .feat-text { font-size: 0.85rem; font-weight: 600; color: var(--navy); line-height: 1.4; }
+
+        /* ============ GALLERY STRIP ============ */
+        .gallery-strip { background: var(--cream); overflow: hidden; }
+        .gallery-strip-inner { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+        .gallery-strip-inner img {
+            width: 100%; height: 240px; object-fit: cover;
+            transition: transform 0.6s ease, filter 0.4s ease; filter: saturate(0.85);
+        }
+        .gallery-strip-inner img:hover { transform: scale(1.05); filter: saturate(1.1); }
+
+        /* ============ CONTACT ============ */
+        .contact { padding: 120px 0; background: var(--warm-white); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+        .contact-info h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--navy); margin-bottom: 16px; }
+        .contact-info > p { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
+        .contact-methods { display: flex; flex-direction: column; gap: 16px; }
+        .contact-method {
+            display: flex; align-items: center; gap: 16px; padding: 20px 24px;
+            background: var(--white); border-radius: var(--radius); transition: var(--transition);
+            border: 1px solid rgba(26,31,54,0.06);
+        }
+        .contact-method:hover { transform: translateX(6px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+        .contact-method .method-icon {
+            width: 48px; height: 48px; background: var(--gold-pale); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .contact-method .method-text strong { display: block; font-size: 0.95rem; color: var(--navy); margin-bottom: 2px; }
+        .contact-method .method-text span { font-size: 0.85rem; color: var(--text-secondary); }
+        .contact-form-wrapper {
+            background: var(--white); border-radius: var(--radius-lg); padding: 44px;
+            box-shadow: var(--shadow-md); border: 1px solid rgba(26,31,54,0.04);
+        }
+        .contact-form-wrapper h3 { font-size: 1.5rem; color: var(--navy); margin-bottom: 8px; }
+        .contact-form-wrapper > p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 14px 18px; border: 1.5px solid var(--sand); border-radius: var(--radius);
+            font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--navy);
+            background: var(--warm-white); transition: var(--transition); outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--gold); box-shadow: 0 0 0 3px rgba(198,164,78,0.12);
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-light); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-submit { margin-top: 8px; }
+        .form-submit .btn { width: 100%; justify-content: center; padding: 16px 32px; }
+
+        /* ============ FOOTER ============ */
+        footer { background: var(--navy); padding: 60px 0 30px; }
+        .footer-top {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 28px;
+        }
+        .footer-logo {
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--white);
+        }
+        .footer-logo .logo-mark {
+            width: 32px; height: 32px; background: var(--gold); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: var(--white);
+        }
+        .footer-links { display: flex; gap: 30px; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.5); font-size: 0.9rem; transition: color var(--transition); }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .footer-bottom p, .footer-bottom .footer-locale { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+        /* ============ SCROLL REVEAL ============ */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .service-card.featured { order: -1; }
+            .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .package-card.featured { order: -1; }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .results-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .about-image img { height: 400px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+            .gallery-strip-inner { grid-template-columns: repeat(3, 1fr); }
+            .gallery-strip-inner img:nth-child(4), .gallery-strip-inner img:nth-child(5) { display: none; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; position: fixed; inset: 0; background: var(--navy);
+                flex-direction: column; align-items: center; justify-content: center; gap: 28px; z-index: 999;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links a.nav-item { color: rgba(255,255,255,0.85) !important; font-size: 1.2rem; }
+            .lang-switch { border-color: rgba(255,255,255,0.35) !important; }
+            .lang-switch button { color: rgba(255,255,255,0.75) !important; }
+            .lang-switch button.active { color: var(--white) !important; }
+            .nav-toggle { display: flex; }
+            .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--white); }
+            .nav-toggle.open span:nth-child(2) { opacity: 0; }
+            .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--white); }
+            .hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+            .hero-sub { font-size: 1rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .portfolio-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+            .results-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .result-card { padding: 32px 16px; }
+            .about-features { grid-template-columns: 1fr; }
+            .about-image img { height: 300px; }
+            .form-row { grid-template-columns: 1fr; }
+            .contact-form-wrapper { padding: 32px 24px; }
+            .footer-top { flex-direction: column; gap: 24px; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+            .footer-links { justify-content: center; }
+            .gallery-strip-inner { grid-template-columns: repeat(2, 1fr); }
+            .gallery-strip-inner img:nth-child(3) { display: none; }
+            .gallery-strip-inner img { height: 180px; }
+        }
+        @media (max-width: 480px) {
+            .results-grid { grid-template-columns: 1fr; }
+            .gallery-strip-inner { grid-template-columns: 1fr; }
+            .gallery-strip-inner img:nth-child(2) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-mark">DK</span>
+                Digital Kickstarter
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#services" class="nav-item"><span data-lang="tr">Hizmetler</span><span data-lang="en">Services</span></a>
+                <a href="#portfolio" class="nav-item"><span data-lang="tr">Portfolyo</span><span data-lang="en">Portfolio</span></a>
+                <a href="#packages" class="nav-item"><span data-lang="tr">Paketler</span><span data-lang="en">Packages</span></a>
+                <a href="#about" class="nav-item"><span data-lang="tr">Hakkımızda</span><span data-lang="en">About</span></a>
+                <a href="#contact" class="nav-cta"><span data-lang="tr">Görüşme Ayarla</span><span data-lang="en">Book a Call</span></a>
+                <div class="lang-switch">
+                    <button id="btnTR" class="active" onclick="setLang('tr')">TR</button>
+                    <button id="btnEN" onclick="setLang('en')">EN</button>
+                </div>
+            </div>
+            <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1660675587832-4dc3ae3147a4?w=1920&q=80&auto=format&fit=crop" alt="Kaş kıyı şeridi, Türk Rivierası" loading="eager">
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span data-lang="tr">Türk Rivierası'na hizmet veriyoruz</span>
+                <span data-lang="en">Now serving the Turkish Riviera</span>
+            </div>
+            <h1>
+                <span data-lang="tr">Bulunun. Görünün.<br><span class="gold">Dolun.</span></span>
+                <span data-lang="en">Get found. Get seen.<br><span class="gold">Get booked.</span></span>
+            </h1>
+            <p class="hero-sub">
+                <span data-lang="tr">Akdeniz'in turizm işletmelerine güçlü bir dijital varlık kazandırıyoruz — doğru misafirler sizi bulsun, güvensin ve doğrudan rezervasyon yapsın.</span>
+                <span data-lang="en">We help Mediterranean tourism businesses build a powerful online presence — so the right guests find you, trust you, and book you directly.</span>
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary btn-arrow"><span data-lang="tr">Ücretsiz Görüşme</span><span data-lang="en">Book a Free Call</span></a>
+                <a href="#portfolio" class="btn btn-outline"><span data-lang="tr">İşlerimizi Görün</span><span data-lang="en">See Our Work</span></a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span data-lang="tr">Kaydır</span><span data-lang="en">Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES ==================== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header reveal">
+                <p class="section-label"><span data-lang="tr">Ne Yapıyoruz</span><span data-lang="en">What We Do</span></p>
+                <h2 class="section-title"><span data-lang="tr">Güçlü bir işletmeye üç adım</span><span data-lang="en">Three steps to a stronger business</span></h2>
+                <p class="section-subtitle"><span data-lang="tr">Her yerel işletme görünmeyi hak eder. Dijital tarafı biz hallederiz, siz en iyi yaptığınız işe odaklanın.</span><span data-lang="en">Every local business deserves to be seen. We handle the digital side so you can focus on what you do best.</span></p>
+            </div>
+            <div class="services-grid">
+
+                <!-- Card 1 -->
+                <div class="service-card reveal reveal-delay-1">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                    <p class="service-tag"><span data-lang="tr">1. Adım</span><span data-lang="en">Step 1</span></p>
+                    <h3 class="service-name"><span data-lang="tr">Bulunun</span><span data-lang="en">Get Found</span></h3>
+                    <p class="service-desc"><span data-lang="tr">Turistler sizin gibi işletmeleri ararken karşılarına çıkın. Sizi kelimenin tam anlamıyla haritaya koyuyoruz.</span><span data-lang="en">Show up when travelers search for businesses like yours. We put you on the map — literally.</span></p>
+                    <div class="service-divider"></div>
+                    <ul class="service-features">
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Google İşletme Profili kurulumu ve optimizasyonu</span><span data-lang="en">Google Business Profile setup & optimization</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Google Haritalar kaydı ve yerel SEO</span><span data-lang="en">Google Maps listing & local SEO</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Yorum toplama stratejisi</span><span data-lang="en">Review generation strategy</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Rakip analizi ve konumlandırma</span><span data-lang="en">Competitor analysis & positioning</span></li>
+                    </ul>
+                    <div class="service-bottom">
+                        <a href="#contact" class="btn btn-outline-dark btn-arrow"><span data-lang="tr">Başlayın</span><span data-lang="en">Get Started</span></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 (FEATURED) -->
+                <div class="service-card featured reveal reveal-delay-2">
+                    <span class="badge-popular"><span data-lang="tr">En Popüler</span><span data-lang="en">Most Popular</span></span>
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <p class="service-tag"><span data-lang="tr">2. Adım</span><span data-lang="en">Step 2</span></p>
+                    <h3 class="service-name"><span data-lang="tr">Görünün</span><span data-lang="en">Get Seen</span></h3>
+                    <p class="service-desc"><span data-lang="tr">Güven veren, misafirlere gelmeden önce ne bekleyeceklerini gösteren şık bir web sitesi.</span><span data-lang="en">A beautiful website that builds trust and shows guests exactly what to expect before they arrive.</span></p>
+                    <div class="service-divider"></div>
+                    <ul class="service-features">
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Size özel, mobil uyumlu web sitesi</span><span data-lang="en">Custom responsive website</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Profesyonel fotoğraf yönlendirmesi</span><span data-lang="en">Professional photography direction</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Çok dilli destek (TR / EN / DE)</span><span data-lang="en">Multilingual support (TR / EN / DE)</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Mobil öncelikli tasarım, hızlı yükleme</span><span data-lang="en">Mobile-first design & fast loading</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">"Bulunun" adımının tamamı dahil</span><span data-lang="en">Everything in Get Found, included</span></li>
+                    </ul>
+                    <div class="service-bottom">
+                        <a href="#contact" class="btn btn-primary btn-arrow"><span data-lang="tr">Başlayın</span><span data-lang="en">Get Started</span></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card reveal reveal-delay-3">
+                    <div class="service-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+                    </div>
+                    <p class="service-tag"><span data-lang="tr">3. Adım</span><span data-lang="en">Step 3</span></p>
+                    <h3 class="service-name"><span data-lang="tr">Dolun</span><span data-lang="en">Get Booked</span></h3>
+                    <p class="service-desc"><span data-lang="tr">Ziyaretçileri ödeme yapan misafirlere dönüştürün. Online rezervasyon, WhatsApp entegrasyonu ve doğrudan rezervasyon araçları.</span><span data-lang="en">Turn visitors into paying guests. Online booking, WhatsApp integration, and direct reservation tools.</span></p>
+                    <div class="service-divider"></div>
+                    <ul class="service-features">
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Online rezervasyon sistemi</span><span data-lang="en">Online booking & reservation system</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">WhatsApp Business entegrasyonu</span><span data-lang="en">WhatsApp Business integration</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Komisyonsuz doğrudan rezervasyon</span><span data-lang="en">Commission-free direct bookings</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">"Bulunun" + "Görünün" adımları dahil</span><span data-lang="en">Everything in Get Found + Get Seen</span></li>
+                    </ul>
+                    <div class="service-bottom">
+                        <a href="#contact" class="btn btn-outline-dark btn-arrow"><span data-lang="tr">Başlayın</span><span data-lang="en">Get Started</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PORTFOLIO ==================== -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="portfolio-header reveal">
+                <p class="section-label"><span data-lang="tr">İşlerimiz</span><span data-lang="en">Our Work</span></p>
+                <h2 class="section-title"><span data-lang="tr">Hazırladığımız örnek siteler</span><span data-lang="en">Demo sites we've built</span></h2>
+                <p class="section-subtitle"><span data-lang="tr">Türk Rivierası'ndaki işletmeler için tasarladığımız çift dilli örnekler.</span><span data-lang="en">Bilingual examples designed for businesses along the Turkish Riviera.</span></p>
+            </div>
+            <div class="portfolio-grid">
+
+                <div class="portfolio-card reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1684578706274-db960a34431d?w=800&q=80&auto=format&fit=crop" alt="Kaş'ta Akdeniz manzaralı teras" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-name">Ay Pansiyon</h3>
+                        <p class="portfolio-location">Kaş</p>
+                        <div class="portfolio-tags">
+                            <span data-lang="tr">Web Sitesi</span><span data-lang="en">Website</span>
+                            <span>Google</span>
+                            <span data-lang="tr">Rezervasyon</span><span data-lang="en">Booking</span>
+                            <span data-lang="tr">Çift Dilli</span><span data-lang="en">Bilingual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal reveal-delay-2">
+                    <img src="https://images.unsplash.com/photo-1669650657327-71c9e84ded59?w=800&q=80&auto=format&fit=crop" alt="Kaş kasabası ve arkasındaki dağlar" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-name">Meltem Pansiyon</h3>
+                        <p class="portfolio-location">Kaş</p>
+                        <div class="portfolio-tags">
+                            <span data-lang="tr">Web Sitesi</span><span data-lang="en">Website</span>
+                            <span>Google</span>
+                            <span data-lang="tr">Rezervasyon</span><span data-lang="en">Booking</span>
+                            <span data-lang="tr">Çift Dilli</span><span data-lang="en">Bilingual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal reveal-delay-3">
+                    <img src="https://images.unsplash.com/photo-1569660073216-1a6762baad6a?w=800&q=80&auto=format&fit=crop" alt="Ölüdeniz koyunda demirli yatlar" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-name">Viking Ölüdeniz</h3>
+                        <p class="portfolio-location">Fethiye</p>
+                        <div class="portfolio-tags">
+                            <span data-lang="tr">Web Sitesi</span><span data-lang="en">Website</span>
+                            <span>Google</span>
+                            <span data-lang="tr">Tekne Turu</span><span data-lang="en">Boat Tours</span>
+                            <span data-lang="tr">Çift Dilli</span><span data-lang="en">Bilingual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal reveal-delay-1">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80&auto=format&fit=crop" alt="Akdeniz peyzajlı butik otel havuzu" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-name">Kalkan Hotel</h3>
+                        <p class="portfolio-location">Kalkan</p>
+                        <div class="portfolio-tags">
+                            <span data-lang="tr">Web Sitesi</span><span data-lang="en">Website</span>
+                            <span>Google</span>
+                            <span data-lang="tr">Rezervasyon</span><span data-lang="en">Booking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal reveal-delay-2">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop" alt="Sıcak Akdeniz atmosferli restoran" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3 class="portfolio-name"><span data-lang="tr">Fethiye Restoran</span><span data-lang="en">Fethiye Restaurant</span></h3>
+                        <p class="portfolio-location">Fethiye</p>
+                        <div class="portfolio-tags">
+                            <span data-lang="tr">Web Sitesi</span><span data-lang="en">Website</span>
+                            <span>Google</span>
+                            <span data-lang="tr">Menü</span><span data-lang="en">Menu</span>
+                            <span data-lang="tr">Çift Dilli</span><span data-lang="en">Bilingual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-cta reveal reveal-delay-3">
+                    <div class="cta-icon">+</div>
+                    <h3><span data-lang="tr">Sıradaki İşletme Sizsiniz</span><span data-lang="en">Your Business Here</span></h3>
+                    <p><span data-lang="tr">Aralarına katılmaya hazır mısınız? Hedeflerinizi konuşalım.</span><span data-lang="en">Ready to join them? Let's talk about your goals.</span></p>
+                    <a href="#contact" class="btn btn-gold-outline btn-arrow"><span data-lang="tr">Projeye Başlayın</span><span data-lang="en">Start a Project</span></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PACKAGES ==================== -->
+    <section class="packages" id="packages">
+        <div class="container">
+            <div class="packages-header reveal">
+                <p class="section-label"><span data-lang="tr">Paketler</span><span data-lang="en">Packages</span></p>
+                <h2 class="section-title"><span data-lang="tr">İşletmenize uygun paketi seçin</span><span data-lang="en">Choose the package that fits</span></h2>
+                <p class="section-subtitle"><span data-lang="tr">Yıllık veya aylık. Kurulum ücreti yok. Her paket bir öncekinin üzerine ekler.</span><span data-lang="en">Annual or monthly. No setup fees. Each package builds on the previous one.</span></p>
+            </div>
+            <div class="packages-grid">
+
+                <!-- Package 1 -->
+                <div class="package-card reveal reveal-delay-1">
+                    <h3 class="package-name">Görünürlük</h3>
+                    <p class="package-tagline"><span data-lang="tr">Google'da bulunmaya başlayın</span><span data-lang="en">Start getting found on Google</span></p>
+                    <div class="package-divider"></div>
+                    <ul class="package-features">
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Google profil optimizasyonu</span><span data-lang="en">Google profile optimization</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Aylık içerik güncellemeleri</span><span data-lang="en">Monthly content updates</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Yorum yönetimi</span><span data-lang="en">Review management</span></li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline-dark btn-arrow"><span data-lang="tr">Bilgi Alın</span><span data-lang="en">Learn More</span></a>
+                </div>
+
+                <!-- Package 2 (featured) -->
+                <div class="package-card featured reveal reveal-delay-2">
+                    <span class="badge-popular"><span data-lang="tr">En Popüler</span><span data-lang="en">Most Popular</span></span>
+                    <h3 class="package-name">Dijital Varlık</h3>
+                    <p class="package-tagline"><span data-lang="tr">Paket 1 + tam bir dijital varlık</span><span data-lang="en">Package 1 + a full digital presence</span></p>
+                    <div class="package-divider"></div>
+                    <ul class="package-features">
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Görünürlük paketinin tamamı</span><span data-lang="en">Everything in Görünürlük</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Çift dilli web sitesi (TR/EN)</span><span data-lang="en">Bilingual website (TR/EN)</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">SEO optimizasyonu</span><span data-lang="en">SEO optimization</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Instagram şablonları</span><span data-lang="en">Instagram templates</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">TripAdvisor kurulumu</span><span data-lang="en">TripAdvisor setup</span></li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary btn-arrow"><span data-lang="tr">Bilgi Alın</span><span data-lang="en">Learn More</span></a>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="package-card reveal reveal-delay-3">
+                    <h3 class="package-name">Tam Paket</h3>
+                    <p class="package-tagline"><span data-lang="tr">Paket 2 + rezervasyon ve büyüme</span><span data-lang="en">Package 2 + bookings & growth</span></p>
+                    <div class="package-divider"></div>
+                    <ul class="package-features">
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Dijital Varlık paketinin tamamı</span><span data-lang="en">Everything in Dijital Varlık</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Online rezervasyon sistemi</span><span data-lang="en">Online booking system</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Ayda 8 Instagram paylaşımı</span><span data-lang="en">8 Instagram posts / month</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Almanca site (DE)</span><span data-lang="en">German site (DE)</span></li>
+                        <li><span class="check">&#10003;</span><span data-lang="tr">Strateji görüşmeleri</span><span data-lang="en">Strategy calls</span></li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline-dark btn-arrow"><span data-lang="tr">Bilgi Alın</span><span data-lang="en">Learn More</span></a>
+                </div>
+            </div>
+            <p class="packages-note"><span data-lang="tr">Fiyatlandırma işletmenizin ihtiyaçlarına göre belirlenir. Ücretsiz görüşmede netleştirelim.</span><span data-lang="en">Pricing is tailored to your business needs. Let's clarify it on a free call.</span></p>
+        </div>
+    </section>
+
+    <!-- ==================== RESULTS ==================== -->
+    <section class="results" id="results">
+        <div class="container">
+            <div class="results-header reveal">
+                <p class="section-label"><span data-lang="tr">Etki</span><span data-lang="en">The Impact</span></p>
+                <h2 class="section-title"><span data-lang="tr">Fark yaratan rakamlar</span><span data-lang="en">Numbers that move the needle</span></h2>
+                <p class="section-subtitle"><span data-lang="tr">Dijital varlığınız çalıştığında, gerisi gelir.</span><span data-lang="en">When your digital presence works, everything else follows.</span></p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card reveal reveal-delay-1">
+                    <div class="result-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <div class="result-number">3&ndash;5x</div>
+                    <p class="result-label"><span data-lang="tr">İlk 90 günde<br>Google profil görüntülenmesi</span><span data-lang="en">Google profile views<br>in the first 90 days</span></p>
+                </div>
+                <div class="result-card reveal reveal-delay-2">
+                    <div class="result-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div class="result-number">+40%</div>
+                    <p class="result-label"><span data-lang="tr">Doğrudan arama ve<br>taleplerde artış</span><span data-lang="en">Increase in direct<br>calls and inquiries</span></p>
+                </div>
+                <div class="result-card reveal reveal-delay-3">
+                    <div class="result-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <div class="result-number">24/7</div>
+                    <p class="result-label"><span data-lang="tr">İşletmeniz online olarak<br>görünür ve rezerve edilebilir</span><span data-lang="en">Your business visible<br>and bookable online</span></p>
+                </div>
+                <div class="result-card reveal reveal-delay-4">
+                    <div class="result-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <div class="result-number"><span data-lang="tr">5 gün</span><span data-lang="en">5 days</span></div>
+                    <p class="result-label"><span data-lang="tr">Çoğu projede<br>yayına alma süresi</span><span data-lang="en">Typical launch time<br>for most projects</span></p>
+                </div>
+            </div>
+            <p class="results-note"><span data-lang="tr">Optimize edilmiş yerel işletme kayıtları için sektör ortalamalarına dayanmaktadır.</span><span data-lang="en">Based on industry benchmarks for optimized local business listings.</span></p>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1683977817985-8493d2836311?w=800&q=80&auto=format&fit=crop" alt="Kaş limanında demirli geleneksel tekneler" loading="lazy">
+                </div>
+                <div class="about-content reveal reveal-delay-2">
+                    <p class="about-label"><span data-lang="tr">Hakkımızda</span><span data-lang="en">About Us</span></p>
+                    <h2 class="about-title"><span data-lang="tr">Yerel işletmeler için kurulmuş çevik bir ajans</span><span data-lang="en">A lean agency built for local businesses</span></h2>
+                    <p class="about-text"><span data-lang="tr">Digital Kickstarter tek bir inançla kuruldu: Kaş'taki aile pansiyonundan Ölüdeniz'deki tekne turuna kadar her yerel işletme, büyük otellerin sahip olduğu dijital araçları hak ediyor.</span><span data-lang="en">Digital Kickstarter was founded on one belief: every local business — from a family pansiyon in Kaş to a boat tour in Ölüdeniz — deserves the same digital tools big hotels take for granted.</span></p>
+                    <p class="about-text"><span data-lang="tr">Türkiye odaklı, çift dilli çalışıyoruz. Hızlı hareket eder, akıllı kurar ve asla kurulum ücreti almayız. Çoğu proje 5 iş günü içinde yayına girer.</span><span data-lang="en">We work bilingually with a focus on Turkey. We move fast, build smart, and never charge setup fees. Most projects launch within 5 business days.</span></p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                            <span class="feat-text"><span data-lang="tr">Kurulum ücreti yok,<br>risk yok</span><span data-lang="en">No setup fees,<br>no risk</span></span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                            <span class="feat-text"><span data-lang="tr">Çift dilli ekip<br>(TR / EN / DE)</span><span data-lang="en">Bilingual team<br>(TR / EN / DE)</span></span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                            <span class="feat-text"><span data-lang="tr">Çoğu projede<br>5 günde teslim</span><span data-lang="en">5-day delivery<br>on most projects</span></span>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                            <span class="feat-text"><span data-lang="tr">Akdeniz kıyısı<br>uzmanı</span><span data-lang="en">Mediterranean coast<br>specialists</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALLERY STRIP ==================== -->
+    <div class="gallery-strip">
+        <div class="gallery-strip-inner">
+            <img src="https://images.unsplash.com/photo-1659092120059-a26831b7fc61?w=800&q=80&auto=format&fit=crop" alt="Kaş sokakları" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1672950301630-b9f735d8350a?w=800&q=80&auto=format&fit=crop" alt="Kaş kıyısında yüzme" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1602435709052-d5dc2e4f7f43?w=800&q=80&auto=format&fit=crop" alt="Kaş yakınında turkuaz koy" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1515487992630-1cd670a04ea8?w=800&q=80&auto=format&fit=crop" alt="Ölüdeniz üzerinde yamaç paraşütü" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1669872486359-edeb02d4cca1?w=800&q=80&auto=format&fit=crop" alt="Ölüdeniz deniz ve dağlar" loading="lazy">
+        </div>
+    </div>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <p class="section-label"><span data-lang="tr">İletişim</span><span data-lang="en">Get in Touch</span></p>
+                    <h2><span data-lang="tr">Birlikte bir şeyler inşa edelim</span><span data-lang="en">Let's build something together</span></h2>
+                    <p><span data-lang="tr">İster Kaş'ta pansiyon sahibi, ister Fethiye'de tekne turu işletmecisi, ister Kalkan'da restoran olun — sizden haber almak isteriz. Baskı yok, karmaşık terimler yok; sadece hedefleriniz hakkında dostça bir sohbet.</span><span data-lang="en">Whether you run a pansiyon in Kaş, a boat tour in Fethiye, or a restaurant in Kalkan — we'd love to hear from you. No pressure, no jargon, just a friendly conversation about your goals.</span></p>
+                    <div class="contact-methods">
+                        <a href="#contact" class="contact-method">
+                            <div class="method-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div class="method-text">
+                                <strong><span data-lang="tr">Ücretsiz Görüşme</span><span data-lang="en">Book a Free Call</span></strong>
+                                <span data-lang="tr">15 dakikalık keşif görüşmesi, taahhüt yok</span><span data-lang="en">15-minute discovery call, no commitment</span>
+                            </div>
+                        </a>
+                        <a href="#contact" class="contact-method">
+                            <div class="method-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="#C6A44E"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 0 0 .612.616l4.54-1.472A11.942 11.942 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 0 1-5.39-1.584l-.386-.232-2.692.873.896-2.64-.254-.403A9.935 9.935 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                            </div>
+                            <div class="method-text">
+                                <strong>WhatsApp</strong>
+                                <span data-lang="tr">Kısa sorular için anında yazın</span><span data-lang="en">Quick questions? Message us anytime</span>
+                            </div>
+                        </a>
+                        <a href="mailto:merhaba@digitalkickstarter.co" class="contact-method">
+                            <div class="method-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C6A44E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div class="method-text">
+                                <strong><span data-lang="tr">E-posta</span><span data-lang="en">Email Us</span></strong>
+                                <span>merhaba@digitalkickstarter.co</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper reveal reveal-delay-2">
+                    <h3><span data-lang="tr">Bize mesaj gönderin</span><span data-lang="en">Send us a message</span></h3>
+                    <p><span data-lang="tr">24 saat içinde size geri döneriz.</span><span data-lang="en">We'll get back to you within 24 hours.</span></p>
+                    <form id="contactForm" onsubmit="return handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name"><span data-lang="tr">Adınız</span><span data-lang="en">Your Name</span></label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><span data-lang="tr">E-posta Adresi</span><span data-lang="en">Email Address</span></label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="business"><span data-lang="tr">İşletme Adı</span><span data-lang="en">Business Name</span></label>
+                            <input type="text" id="business">
+                        </div>
+                        <div class="form-group">
+                            <label for="service"><span data-lang="tr">Neyle ilgileniyorsunuz?</span><span data-lang="en">What are you interested in?</span></label>
+                            <select id="service">
+                                <option value="" disabled selected data-tr="Bir hizmet seçin..." data-en="Select a service...">Bir hizmet seçin...</option>
+                                <option value="gorunurluk" data-tr="Görünürlük — Google & Harita" data-en="Görünürlük — Google & Maps">Görünürlük — Google & Harita</option>
+                                <option value="dijital" data-tr="Dijital Varlık — Web Sitesi & SEO" data-en="Dijital Varlık — Website & SEO">Dijital Varlık — Web Sitesi & SEO</option>
+                                <option value="tam" data-tr="Tam Paket — Her Şey Dahil" data-en="Tam Paket — Everything Included">Tam Paket — Her Şey Dahil</option>
+                                <option value="other" data-tr="Henüz emin değilim / Diğer" data-en="Not sure yet / Other">Henüz emin değilim / Diğer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message"><span data-lang="tr">Projenizden bahsedin</span><span data-lang="en">Tell us about your project</span></label>
+                            <textarea id="message"></textarea>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary btn-arrow"><span data-lang="tr">Mesaj Gönder</span><span data-lang="en">Send Message</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <span class="logo-mark">DK</span>
+                    Digital Kickstarter
+                </div>
+                <div class="footer-links">
+                    <a href="#services" class="nav-item"><span data-lang="tr">Hizmetler</span><span data-lang="en">Services</span></a>
+                    <a href="#portfolio" class="nav-item"><span data-lang="tr">Portfolyo</span><span data-lang="en">Portfolio</span></a>
+                    <a href="#packages" class="nav-item"><span data-lang="tr">Paketler</span><span data-lang="en">Packages</span></a>
+                    <a href="#about" class="nav-item"><span data-lang="tr">Hakkımızda</span><span data-lang="en">About</span></a>
+                    <a href="#contact" class="nav-item"><span data-lang="tr">İletişim</span><span data-lang="en">Contact</span></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Digital Kickstarter. <span data-lang="tr">Tüm hakları saklıdır.</span><span data-lang="en">All rights reserved.</span></p>
+                <p class="footer-locale">Kaş &middot; Kalkan &middot; Fethiye &middot; Bodrum</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            const html = document.documentElement;
+            if (lang === 'en') { html.classList.add('en'); html.lang = 'en'; }
+            else { html.classList.remove('en'); html.lang = 'tr'; }
+            document.getElementById('btnTR').classList.toggle('active', lang === 'tr');
+            document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+            document.querySelectorAll('option[data-tr]').forEach(function(opt) {
+                opt.textContent = lang === 'en' ? opt.getAttribute('data-en') : opt.getAttribute('data-tr');
+            });
+        }
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 60) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('open');
+            document.getElementById('navToggle').classList.toggle('open');
+        }
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('open');
+                document.getElementById('navToggle').classList.remove('open');
+            });
+        });
+
+        const revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const isEN = document.documentElement.classList.contains('en');
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.textContent = isEN ? "Sent! We'll be in touch." : "Gönderildi! En kısa sürede dönüş yapacağız.";
+            btn.style.background = '#4ADE80';
+            btn.disabled = true;
+            setTimeout(function() {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+                e.target.reset();
+            }, 3000);
+            return false;
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+    </script>
+</body>
+</html>
